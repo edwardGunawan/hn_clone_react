@@ -27,7 +27,7 @@ const oneNews = {
 
 describe('NewList Component', () => {
     let wrapper;
-    const { by, descendants, kids, time, title, type, url } = oneNews;
+    const { by, descendants, kids, time, title, type, url, score } = oneNews;
     beforeEach(() => {
         wrapper = shallow(<NewList by={by}
             descendants={descendants}
@@ -35,16 +35,17 @@ describe('NewList Component', () => {
             time={time}
             title={title}
             type={type}
+            score={score}
             url={url} />);
     });
 
     it('should render <div/>', () => {
         expect(wrapper.find('div').length).toEqual(1);
-    })
+    });
 
     it('should render all props value', () => {
         expect(wrapper.text()).toEqual(
-            `Show HN: Lipreading with Deep Learning(https://github.com/astorfi/lip-reading-deeplearning)6 by irsina 1540065131 ago | story`
+            `Show HN: Lipreading with Deep Learning(github.com) 102 points by irsina <TimeAgo /> | 17 comments`
             );
     });
 

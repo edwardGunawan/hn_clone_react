@@ -16,6 +16,7 @@ ShallowWrapper {
         18265313,
       ]
     }
+    score={102}
     time={1540065131}
     title="Show HN: Lipreading with Deep Learning"
     type="story"
@@ -39,20 +40,31 @@ ShallowWrapper {
           Show HN: Lipreading with Deep Learning
           <span>
             (
-            https://github.com/astorfi/lip-reading-deeplearning
+            github.com
             )
           </span>
         </h6>,
         <p>
-          6
-           by 
+           
+          102
+           points by 
           irsina
            
-          1540065131
-           ago | 
-          <scan>
-            story
-          </scan>
+          <TimeAgo
+            component="time"
+            date={1540065131000}
+            formatter={[Function]}
+            live={true}
+            maxPeriod={Infinity}
+            minPeriod={0}
+            now={[Function]}
+          />
+           | 
+          <span>
+            17
+             
+            comments
+          </span>
         </p>,
       ],
     },
@@ -67,7 +79,7 @@ ShallowWrapper {
             "Show HN: Lipreading with Deep Learning",
             <span>
               (
-              https://github.com/astorfi/lip-reading-deeplearning
+              github.com
               )
             </span>,
           ],
@@ -82,14 +94,14 @@ ShallowWrapper {
             "props": Object {
               "children": Array [
                 "(",
-                "https://github.com/astorfi/lip-reading-deeplearning",
+                "github.com",
                 ")",
               ],
             },
             "ref": null,
             "rendered": Array [
               "(",
-              "https://github.com/astorfi/lip-reading-deeplearning",
+              "github.com",
               ")",
             ],
             "type": "span",
@@ -103,35 +115,71 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            6,
-            " by ",
+            " ",
+            102,
+            " points by ",
             "irsina",
             " ",
-            1540065131,
-            " ago | ",
-            <scan>
-              story
-            </scan>,
+            <TimeAgo
+              component="time"
+              date={1540065131000}
+              formatter={[Function]}
+              live={true}
+              maxPeriod={Infinity}
+              minPeriod={0}
+              now={[Function]}
+            />,
+            " | ",
+            <span>
+              17
+               
+              comments
+            </span>,
           ],
         },
         "ref": null,
         "rendered": Array [
-          6,
-          " by ",
+          " ",
+          102,
+          " points by ",
           "irsina",
           " ",
-          1540065131,
-          " ago | ",
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "component": "time",
+              "date": 1540065131000,
+              "formatter": [Function],
+              "live": true,
+              "maxPeriod": Infinity,
+              "minPeriod": 0,
+              "now": [Function],
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          " | ",
           Object {
             "instance": null,
             "key": undefined,
             "nodeType": "host",
             "props": Object {
-              "children": "story",
+              "children": Array [
+                17,
+                " ",
+                "comments",
+              ],
             },
             "ref": null,
-            "rendered": "story",
-            "type": "scan",
+            "rendered": Array [
+              17,
+              " ",
+              "comments",
+            ],
+            "type": "span",
           },
         ],
         "type": "p",
@@ -150,20 +198,31 @@ ShallowWrapper {
             Show HN: Lipreading with Deep Learning
             <span>
               (
-              https://github.com/astorfi/lip-reading-deeplearning
+              github.com
               )
             </span>
           </h6>,
           <p>
-            6
-             by 
+             
+            102
+             points by 
             irsina
              
-            1540065131
-             ago | 
-            <scan>
-              story
-            </scan>
+            <TimeAgo
+              component="time"
+              date={1540065131000}
+              formatter={[Function]}
+              live={true}
+              maxPeriod={Infinity}
+              minPeriod={0}
+              now={[Function]}
+            />
+             | 
+            <span>
+              17
+               
+              comments
+            </span>
           </p>,
         ],
       },
@@ -178,7 +237,7 @@ ShallowWrapper {
               "Show HN: Lipreading with Deep Learning",
               <span>
                 (
-                https://github.com/astorfi/lip-reading-deeplearning
+                github.com
                 )
               </span>,
             ],
@@ -193,14 +252,14 @@ ShallowWrapper {
               "props": Object {
                 "children": Array [
                   "(",
-                  "https://github.com/astorfi/lip-reading-deeplearning",
+                  "github.com",
                   ")",
                 ],
               },
               "ref": null,
               "rendered": Array [
                 "(",
-                "https://github.com/astorfi/lip-reading-deeplearning",
+                "github.com",
                 ")",
               ],
               "type": "span",
@@ -214,35 +273,71 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              6,
-              " by ",
+              " ",
+              102,
+              " points by ",
               "irsina",
               " ",
-              1540065131,
-              " ago | ",
-              <scan>
-                story
-              </scan>,
+              <TimeAgo
+                component="time"
+                date={1540065131000}
+                formatter={[Function]}
+                live={true}
+                maxPeriod={Infinity}
+                minPeriod={0}
+                now={[Function]}
+              />,
+              " | ",
+              <span>
+                17
+                 
+                comments
+              </span>,
             ],
           },
           "ref": null,
           "rendered": Array [
-            6,
-            " by ",
+            " ",
+            102,
+            " points by ",
             "irsina",
             " ",
-            1540065131,
-            " ago | ",
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "component": "time",
+                "date": 1540065131000,
+                "formatter": [Function],
+                "live": true,
+                "maxPeriod": Infinity,
+                "minPeriod": 0,
+                "now": [Function],
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            " | ",
             Object {
               "instance": null,
               "key": undefined,
               "nodeType": "host",
               "props": Object {
-                "children": "story",
+                "children": Array [
+                  17,
+                  " ",
+                  "comments",
+                ],
               },
               "ref": null,
-              "rendered": "story",
-              "type": "scan",
+              "rendered": Array [
+                17,
+                " ",
+                "comments",
+              ],
+              "type": "span",
             },
           ],
           "type": "p",

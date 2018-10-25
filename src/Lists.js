@@ -7,12 +7,13 @@ const Lists = ({news}) => {
     return (
         <div>
             <ol>
-                {news.map(({ by, descendants, kids, time, title, type, url }, i) => <li key={i}><NewList by={by}
+                {news.map(({ by, descendants, kids, time, title, type, url, score }, i) => <li key={i}><NewList by={by}
                     descendants={descendants}
                     kids={kids}
                     time={time}
                     title={title}
                     type={type}
+                    score={score}
                     url={url} /></li>)}
             </ol>
         </div>

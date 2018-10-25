@@ -57,7 +57,7 @@ describe('Lists Component', () => {
         // console.log(wrapper.children().debug());
         wrapper.forEach((node,i) => {
             const item = news[i];
-            const { by, descendants, kids, time, title, type, url } = item;
+            const { by, descendants, kids, time, title, type, url, score } = item;
             expect(node.find('ol').children().containsMatchingElement(
                 <NewList by={by}
                          descendants={descendants}
@@ -65,7 +65,8 @@ describe('Lists Component', () => {
                          time={time}
                          title={title}
                          type={type}
-                         url={url}/>
+                         url={url}
+                         score={score} />
                     )).toEqual(true);
         });
         
