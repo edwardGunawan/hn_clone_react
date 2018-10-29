@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { Link } from 'react-router-dom';
+
 const TimeAgo = require('react-timeago').default;
 const parse = require('url-parse');
 
 
-const NewList = ({by, descendants, time, title, type, url,score}) => {
+export const NewList = (props) => {
+    const {by, descendants, time, title, url, score, id} = props;
     const url_parse = parse(url);
     return (
         <div>
-            <h6>{title}<span>({url_parse.hostname})</span></h6>
-            <p> {score} points by {by} <TimeAgo date={time*1000}/> | <span>
-            {descendants} {(descendants === 0) ? 'discuss' : 'comments' }</span></p>
+            <h6><a href={url}>{title}<span>({url_parse.hostname})</span></a></h6>
+            <p> {score} points by {by} <TimeAgo date={time*1000}/> | <span><Link to={`item?id=${id}`}>
+                {descendants} {(descendants === 0) ? 'discuss' : 'comments'}</Link></span></p>
         </div>
     )
 }

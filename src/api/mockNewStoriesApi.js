@@ -32,14 +32,6 @@ const stories = [
         url: "https://arcan-fe.com/2018/10/17/arcan-versus-xorg-approaching-feature-parity/"
     },
     {
-        by: "manfredo",
-        id: 18265075,
-        parent: 18264785,
-        text: "Yeah, buts tens of thousands of dollars over the course of nearly 2 decades isn&#x27;t all that much money. If your kid takes the bus, goes to public education, and you don&#x27;t need childcare then the cost of a kid just boils down to room and board. Contrast that with a parent that sends their kid to private school, and wants to pay for a private undergrad. That&#x27;s going to be on the order of at least the hundreds of thousands of dollars. Probably close to half a million.<p>Raising a kid to the expectations of an upper or even upper-middle class family costs orders of magnitude more than raising a kid to the expectations of a poor family. But said upper middle class family probably doesn&#x27;t make a proportionally larger amount. I&#x27;d consider someone &quot;poor&quot; if they make 20-25k a year and &quot;wealthy&quot; if they make 200-250k+. But the costs of raising a child to the expectations of the latter is probably more than 10 times greater. Probably 20-30 times greater. Thus why kids are more proportionally expensive for higher income class people.",
-        time: 1540065158,
-        type: "comment"
-    },
-    {
         by: "njn",
         descendants: 14,
         id: 18265355,
@@ -111,25 +103,37 @@ const stories = [
 ]
 
 class NewStoryApi {
-    static getNewStory() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(storiesId)
-            }, delay);
-        })
-    }
 
     static async getAllStories() {
         // console.log('getAllStories is called');
-        const ids = await NewStoryApi.getNewStory();
-       // mocking return all stories
-        return stories;
+        try {
+            const storiesIdPromise = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(storiesId)
+                }, delay);
+            });
+
+            // const stories = await prom();
+            // mocking return all stories
+            return storiesIdPromise;
+        } catch(e) {
+            console.log('error  in newStory Api', e );
+        }
+        
     }
 
     static async getStoryId(id) {
         return new Promise(resolve => setTimeout(() => {
-            resolve();
+            resolve(stories[0]);
         }, delay));
+    }
+
+    static async getItems(ids) {
+        await Promise.all(ids.map(async (id) => {
+            return this.getStoryId(id);
+        }));
+
+        return stories;
     }
 }
 

@@ -57,7 +57,7 @@ describe('Lists Component', () => {
         // console.log(wrapper.children().debug());
         wrapper.forEach((node,i) => {
             const item = news[i];
-            const { by, descendants, kids, time, title, type, url, score } = item;
+            const { by, descendants, kids, time, title, type, url, score, id } = item;
             expect(node.find('ol').children().containsMatchingElement(
                 <NewList by={by}
                          descendants={descendants}
@@ -66,10 +66,12 @@ describe('Lists Component', () => {
                          title={title}
                          type={type}
                          url={url}
+                         id={id}
                          score={score} />
                     )).toEqual(true);
         });
         
         expect(wrapper.find('ol').children().length).toEqual(2);
-    })
+    });
+
 })

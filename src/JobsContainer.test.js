@@ -2,14 +2,14 @@ import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import Ask from './Ask';
+import JobsContainer from './JobsContainer';
 
 configure({ adapter: new Adapter() });
 
-describe('Ask Component', () => {
+describe('Jobs Container Component', () => {
     let wrapper;
     beforeEach(() => {
-        wrapper = mount(<Ask />);
+        wrapper = mount(<JobsContainer />);
     });
 
     it('should render', () => {

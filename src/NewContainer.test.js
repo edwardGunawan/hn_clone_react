@@ -2,7 +2,9 @@ import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { New } from './New';
+import {NewContainer } from './NewContainer';
+import Main from './Main';
+import { MemoryRouter } from 'react-router-dom';
 
 const stories = [
     {
@@ -116,16 +118,35 @@ configure({adapter: new Adapter()});
 
 describe('New Container Component', () => {
     let wrapper;
-
+    let fetchAllStoriesMock;
     beforeEach(() => {
-        wrapper = mount(<New />);
+        fetchAllStoriesMock = jest.spyOn(NewContainer.prototype, 'fetchAllStories'); // spy on the function being called in componentDidMount
+        wrapper = mount( // here we handling BDD for routing through /new
+            <MemoryRouter initialEntries={["/new"]} initialIndex={0}>
+                <Main />
+            </MemoryRouter>
+        );
     })
 
-    it('should render', () => {
-        expect(wrapper).toHaveLength(1);
+    describe(' If Routes goes to /new', () => {
+
+        it('should render', () => {
+            expect(wrapper).toHaveLength(1);
+        });
+
+        it('should called fetchAllStories function', () => {
+            expect(fetchAllStoriesMock).toHaveBeenCalled();
+            
+        })
     });
 
-    it('should contain Lists component' ,() => {
-        expect(wrapper.children().find('Lists')).toHaveLength(1);
+    it('should render Lists component', () => {
+        expect(wrapper.children().children().find('Lists')).toHaveLength(1);
     });
+    
+    afterEach(() => {
+        fetchAllStoriesMock.mockClear();
+    })
+    
+
 })

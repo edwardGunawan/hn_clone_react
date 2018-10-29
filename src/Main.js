@@ -1,19 +1,21 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import New from './New';
-import Show from './Show';
-import Ask from './Ask';
-import Comment from './Comment';
-import Jobs from './Jobs';
+import NewContainer from './NewContainer';
+import ShowContainer from './ShowContainer';
+import AskContainer from './AskContainer';
+import CommentContainer from './CommentContainer';
+import JobsContainer from './JobsContainer';
+import Item from './Item';
 
 export const Main = () => {
     return (
         <Switch>
-            <Route exact path="/new" component={New}/>
-            <Route exact path="/comment" component={Comment}/>
-            <Route exact path="/show" component={Show}/>
-            <Route exact path="/ask" component={Ask}/>
-            <Route exact path="/jobs" component={Jobs}/>
+            <Route exact path="/new" component={NewContainer}/>
+            <Route exact path="/item" component={Item}/>
+            <Route exact path="/comment" component={CommentContainer}/>
+            <Route exact path="/show" component={ShowContainer}/>
+            <Route exact path="/ask" component={AskContainer}/>
+            <Route exact path="/jobs" component={JobsContainer}/>
         </Switch>
     )
 
