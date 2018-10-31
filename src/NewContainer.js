@@ -12,7 +12,7 @@ export class NewContainer extends Component {
 
         this.fetchAllStories = this.fetchAllStories.bind(this);
         this.state = {
-            news: [],
+            stories: [],
         }
     }
 
@@ -21,22 +21,22 @@ export class NewContainer extends Component {
     }
 
     fetchAllStories() {
-        NewStoryApi.getAllStories()
+        NewStoryApi.getAllStories('newstories')
             .then((ids) => {
                 return NewStoryApi.getItems(ids);
             })
             .then((newsItem) => {
                 //console.log('in New.js ', newsItem);
-                this.setState({ news: newsItem });
+                this.setState({ stories: newsItem });
             })
             .catch(e => console.log("error in fetchAllStories", e));
     }
     
     render() {
-        const {news} = this.state;
+        const {stories} = this.state;
         return (
             <div>
-                <Lists news={news}/>
+                <Lists news={stories}/>
             </div>
         )
     }

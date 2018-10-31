@@ -11,8 +11,8 @@ export default {
     /**
      *  Get endpoint HackerNews API stories, and return its id
      */
-    async getAllStories() {
-        return fetch(`${endPoint}/newstories`);
+    async getAllStories(category) {
+        return fetch(`${endPoint}/${category}`);
     },
 
     /**

@@ -1,8 +1,8 @@
 import delay from './delay';
 
-const storiesId = [1,2,3,4,5,6,7]
+export const storiesId = [1,2,3,4,5,6,7]
 
-const stories = [
+export const stories = [
         {
         "by": "dhouston",
         "descendants": 71,
@@ -104,7 +104,7 @@ const stories = [
 
 class NewStoryApi {
 
-    static async getAllStories() {
+    static async getAllStories(category) {
         // console.log('getAllStories is called');
         try {
             const storiesIdPromise = new Promise((resolve) => {

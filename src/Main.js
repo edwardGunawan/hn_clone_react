@@ -5,11 +5,13 @@ import ShowContainer from './ShowContainer';
 import AskContainer from './AskContainer';
 import CommentContainer from './CommentContainer';
 import JobsContainer from './JobsContainer';
+import TopContainer from './TopContainer';
 import Item from './Item';
 
 export const Main = () => {
     return (
         <Switch>
+            <Route exact path="/" component={TopContainer}/>
             <Route exact path="/new" component={NewContainer}/>
             <Route exact path="/item" component={Item}/>
             <Route exact path="/comment" component={CommentContainer}/>
