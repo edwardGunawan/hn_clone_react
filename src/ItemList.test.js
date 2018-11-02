@@ -6,14 +6,14 @@ configure({ adapter: new Adapter() });
 
 import ItemList from './ItemList';
 import CommentList from './CommentList';
-import Statement from './Statement';
+import NewList from './NewList';
 
 
 describe('ItemList component', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<ItemList/>);
+        wrapper = shallow(<ItemList />);
     })
 
 
@@ -21,8 +21,7 @@ describe('ItemList component', () => {
         expect(wrapper.find('div').length).toEqual(1);
     });
 
-    it('should contains Statement Component and ItemList Component', () => {
-        expect(wrapper.containsMatchingElement(<Statement />)).toEqual(true);
+    it('should contains CommentList Component', () => {
         expect(wrapper.containsMatchingElement(<CommentList />)).toEqual(true);
-    })
+    });
 })

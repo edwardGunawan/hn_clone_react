@@ -27,8 +27,12 @@ describe('Item Component', () => {
     });
 
     it('should render Lists component', () => {
-        expect(wrapper.children().children().find('Lists')).toHaveLength(1);
+        expect(wrapper.children().children().find('ItemList')).toHaveLength(1);
     });
+
+    it('should render NewLists component as Title', () => {
+        expect(wrapper.children().children().find('NewList')).toHaveLength(1);
+    })
 
     afterEach(() => {
         fetchSpecificStoryMock.mockClear();
