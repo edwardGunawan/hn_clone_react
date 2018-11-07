@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 import NewList from './NewList';
 import CommentList from './CommentList';
 
-const ItemList = ({title, by, descendants, url}) => {
+const ItemList = ({kids}) => {
     // TODO: do another fetch over on teach of the kids it if has one
     return (
         <div>
-            <CommentList />    
+            {kids.map((kid, i) => <CommentList key={`${i}-${kid}`} kid={kid}/> )}
         </div>
     )
 }
 
 ItemList.propTypes = {
-    title: PropTypes.string.isRequired,
-    by: PropTypes.string.isRequired,
-    descendants: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
+    kids: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 
 export default ItemList;
