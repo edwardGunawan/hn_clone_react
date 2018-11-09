@@ -8,11 +8,13 @@ configure({ adapter: new Adapter() });
 
 function createTestProps(props) {
     return {
-        by: "norvig",
-        id: 1,
-        parent: 2,
-        text: "Dummy text",
-        time: 1314211127,
+        obj: {
+            by: "norvig",
+            id: 1,
+            parent: 2,
+            text: "Dummy text",
+            time: 1314211127,
+        },
         // allow override common props
         ...props,
     }

@@ -12,11 +12,15 @@ function createTestProps(props={}, name) {
     switch(name) {
         case 'comment':
             return {
-                by: "",
-                id: 0,
-                parent: 0,
-                text: "",
-                time: 0,
+                obj : {
+                    by: '',
+                    id: 0,
+                    kids: [],
+                    parent: 0,
+                    text: '',
+                    time: 0,
+                    type: '',
+                },
                 // allow override common props
                 ...props,
                 }
@@ -54,17 +58,24 @@ describe('CommentList Component', () => {
     });
 
     it('should contain Comment Component', () => {
-        let {by, id, parent, text ,time} = createTestProps({},'comment')
-        expect(wrapper.containsMatchingElement(<Comment by={by} id={id} parent={parent} text={text} time={time} />)).toEqual(true);
+        const props = createTestProps({},'comment');
+        const {obj} = props;
+        expect(wrapper.containsMatchingElement(<div><Comment obj={obj} /></div>)).toEqual(true);
     });
 
     it('should contain ItemList Component if kids is not empty', () => {
-        wrapper.setState({kids:mockKids});
+        wrapper.setState({ obj :{
+            ...wrapper.state('obj'),
+            kids: mockKids,
+        }});
         expect(wrapper.find('ItemList')).toHaveLength(1);
     });
 
     it('should not contain ItemList Component if kids is empty', () => {
-        wrapper.setState({ kids: [] });
+        wrapper.setState({ obj: {
+            ...wrapper.state('obj'),
+            kids: [],
+        }});
         expect(wrapper.find('ItemList')).toHaveLength(0);
     });
 

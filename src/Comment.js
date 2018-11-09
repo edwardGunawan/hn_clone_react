@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 const TimeAgo = require('react-timeago').default;
 
-const Comment = ({ by, id, parent, text, time }) => {
+const Comment = ({obj}) => {
+    const { by, id, parent, text, time } = obj;
     return (
         <div>
             <h6>{by} <TimeAgo date={time * 1000} /> | link</h6>
@@ -16,11 +17,13 @@ const Comment = ({ by, id, parent, text, time }) => {
 
 
 Comment.propTypes= {
-    by: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    parent: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    time: PropTypes.number.isRequired,
+    obj: PropTypes.shape({
+        by: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        parent: PropTypes.number.isRequired,
+        text: PropTypes.string.isRequired,
+        time: PropTypes.number.isRequired,
+    }).isRequired
 }
 
 

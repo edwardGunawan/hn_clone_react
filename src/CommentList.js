@@ -11,14 +11,15 @@ export class CommentList extends Component {
         super(props);
         this.fetchSpecificItem = this.fetchSpecificItem.bind(this);
         this.state = {
-            by: '',
-            id: 0,
-            kids: [],
-            parent:0,
-            text: '',
-            time: 0,
-            type: '',
-            
+            obj: {
+                by: '',
+                id: 0,
+                kids: [],
+                parent: 0,
+                text: '',
+                time: 0,
+                type: '',
+            },
         }
     }
 
@@ -39,13 +40,12 @@ export class CommentList extends Component {
     }
 
     render() {
-        const {by, id, kids, parent, text, time, type} = this.state;
+        const {obj} = this.state;
+        const {kids} = obj;
         return (
             <div>
-                <Comment by={by} id={id} parent={parent} text={text} time={time}/>
+                <Comment obj={obj}/>
                 {kids.length > 0 && <ItemList kids={kids} />}
-                
-
             </div>
         )
     }

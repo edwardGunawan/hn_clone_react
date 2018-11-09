@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ItemList from './ItemList';
 import Title from './Title';
+import Comment from './Comment';
 
 import { withRouter } from 'react-router-dom';
 
@@ -18,8 +19,10 @@ export class Item extends Component {
                 by: '',
                 descendants: 0,
                 kids: [],
+                parent:0,
                 time: 0,
                 title: '',
+                text:'',
                 type: '',
                 score: 0,
                 url: '',
@@ -46,11 +49,12 @@ export class Item extends Component {
     }
 
     render() {
-        const { details} = this.state;
-        const {kids} = details;
+        const {details} = this.state;
+        const {kids, type} = details;
         return (
             <div>
-                <Title obj={details} /> 
+                {type === 'comment' ? <Comment obj={details}/> : 
+                <Title obj={details} /> }
                 <ItemList kids={kids} /> 
             </div>
         )
