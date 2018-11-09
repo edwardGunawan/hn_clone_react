@@ -8,15 +8,7 @@ const Lists = ({news}) => {
     return (
         <div>
             <ol>
-                {news.map(({ by, descendants, kids, time, title, type, url, score, id }, i) => <li key={i}><NewList by={by}
-                    descendants={descendants}
-                    kids={kids}
-                    time={time}
-                    title={title}
-                    type={type}
-                    score={score}
-                    url={url}
-                    id={id} /></li>)}
+                {news.map((obj, i) => <li key={i}><NewList obj={obj} /></li>)}
             </ol>
         </div>
     )

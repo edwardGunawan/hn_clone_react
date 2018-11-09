@@ -14,15 +14,17 @@ export class Item extends Component {
         super(props);
         this.fetchSpecificStory = this.fetchSpecificStory.bind(this);
         this.state = {
-            by: '',
-            descendants: 0,
-            kids: [],
-            time: 0,
-            title: '',
-            type: '',
-            score: 0,
-            url: '',
-            id: 0,
+            details: {
+                by: '',
+                descendants: 0,
+                kids: [],
+                time: 0,
+                title: '',
+                type: '',
+                score: 0,
+                url: '',
+                id: 0,
+            }
         }
     }
 
@@ -35,30 +37,21 @@ export class Item extends Component {
 
 
     fetchSpecificStory(id) {
-        NewStoryApi.getStoryId(id)
+        NewStoryApi.getContentId(id, 'story')
             .then((detail) => {
-                this.setState({
-                    ...detail,
-                });
+                this.setState({ detail });
                 console.log(detail)
             })
             .catch(e => console.log('error in fetchSpecificStory ', e));
     }
 
     render() {
-        const { by, descendants, kids, time, title, type, score,
-        url, id } = this.state;
+        const { details} = this.state;
+        const {kids} = details;
         return (
             <div>
-                {(type !== 'comment') ? <NewList by={by}
-                    descendants={descendants}
-                    kids={kids}
-                    time={time}
-                    title={title}
-                    type={type}
-                    score={score}
-                    url={url}
-                    id={id} /> : <ItemList kids={kids} />}
+                <NewList obj={details} /> 
+                <ItemList kids={kids} /> 
             </div>
         )
     }

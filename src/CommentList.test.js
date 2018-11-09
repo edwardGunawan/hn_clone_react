@@ -1,19 +1,37 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import CommentList from './CommentList';
+import Comment from './Comment';
 
 configure({adapter: new Adapter()});
 
-import CommentList from './CommentList';
-import Comment from './Comment';
-import ItemList from './ItemList';
+
+
+function createTestProps(props={}, name) {
+    switch(name) {
+        case 'comment':
+            return {
+                by: "",
+                id: 0,
+                parent: 0,
+                text: "",
+                time: 0,
+                // allow override common props
+                ...props,
+                }
+        default:
+            return {
+                kid: 18263752,
+            }
+    }
+    
+}
 
 describe('CommentList Component', () => {
     let wrapper;
     let fetchSpecificItemMock;
-    const props = {
-        kid: 18263752,
-    }
+    let props;
     const mockKids = [18263752,
         18263612,
         18264551,
@@ -22,6 +40,7 @@ describe('CommentList Component', () => {
         18263818,]
 
     beforeEach(()=> {
+        props = createTestProps();
         fetchSpecificItemMock = jest.spyOn(CommentList.prototype, 'fetchSpecificItem');
         wrapper = shallow(<CommentList {...props}/>);
     });
@@ -35,7 +54,8 @@ describe('CommentList Component', () => {
     });
 
     it('should contain Comment Component', () => {
-        expect(wrapper.containsMatchingElement(<Comment />)).toEqual(true);
+        let {by, id, parent, text ,time} = createTestProps({},'comment')
+        expect(wrapper.containsMatchingElement(<Comment by={by} id={id} parent={parent} text={text} time={time} />)).toEqual(true);
     });
 
     it('should contain ItemList Component if kids is not empty', () => {

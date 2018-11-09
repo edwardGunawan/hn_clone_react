@@ -21,7 +21,7 @@ describe('Top Container Component', () => {
     });
 
     it('should container Lists Component', () => {
-        expect(wrapper.containsMatchingElement(<Lists />)).toEqual(true);
+        expect(wrapper.containsMatchingElement(<Lists news={wrapper.state('stories')}/>)).toEqual(true);
     });
 
     it('fetchTopStories should be when componentInitially mount', () => {

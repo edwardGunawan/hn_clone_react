@@ -1,4 +1,5 @@
 import delay from './delay';
+import { defaultCipherList } from 'constants';
 
 export const storiesId = [1,2,3,4,5,6,7]
 
@@ -7,7 +8,7 @@ export const stories = [
         "by": "dhouston",
         "descendants": 71,
         "id": 8863,
-        "kids": [8952, 9224, 8917, 8884, 8887, 8943, 8869, 8958, 9005, 9671, 8940, 9067, 8908, 9055, 8865, 8881, 8872, 8873, 8955, 10403, 8903, 8928, 9125, 8998, 8901, 8902, 8907, 8894, 8878, 8870, 8980, 8934, 8876],
+        "kids": [8952],
         "score": 111,
         "time": 1175714200,
         "title": "My YC app: Dropbox - Throw away your USB drive",
@@ -102,6 +103,53 @@ export const stories = [
     }
 ]
 
+const comments = [
+    {
+        by: "nickb",
+        id: 8952,
+        kids: [
+            9153
+        ],
+        parent: 8863,
+        text: `The only problem is that you have to install something. See, it's not the same as USB drive. Most corporate laptops are locked and you can't install anything on them. 
+        That's gonna be the problem. Also, another point where your USB comparison fails is that USB works in places where you don't have internet access. <p>My suggestion is to drop 
+        the 'Throw away your USB drive' tag line and use something else... it will just muddy your vision.<p>Kudos for launching it!!! Launching/shipping is extremely hard and you pulled it off! Super!`,
+        time: 1175727286,
+        type: "comment"
+    },
+    {
+        by: "vlad",
+        id: 9153,
+        kids: [
+            9235
+        ],
+        parent: 8952,
+        text: `What about this on the download page (also good for a press release.)<p>Drop Box: Automatically safeguards even your biggest worries, so you don't have any!<p>What is a Drop 
+        Box?<p>Your Drop Box is a File Cabinet that Follows You Around Everywhere You Want to Go, Across Your Computers, or Across The Country.<p>Download and start using it today. 
+        (link goes here.)<p>Your Drop Box includes your own Secretary who Files and Photocopies Every Document You Make or Edit, So You Can See What Each Document Looked Like Yesterday, Two 
+        Days Ago, or at Any Point In Time. Did I Mention the Secretary and the File Cabinet are Fire-Proof and Wireless?<p>But, it's all digital. And, it's secure. And it's built to work between 
+        as many Windows desktops or laptop computer you use at NO EXTRA COST! See for yourself! (another link to the download.)<p>Or, access your files at work from a web-based interface! It's so 
+        flexible!<p>Q: Do I have to change how I work?<p>A: Absolutely not. Any file and folder (Word documents, spreadsheets, family photos, etc) you add to your Drop Box folder is automatically 
+        synchronized and saved remotely.<p>Q: What is the Drop Box folder?<p>A: It's just a special folder which will appear on your computer. Anything added to it is automatically saved, synchronized, 
+        and "dated" so you can go back in time!<p>Try it now! (another download link) It's safe, it's free, and you can use it on as many computers to share, backup, and keep archived file versions on, as you need to,
+         by registering for just one account!`,
+        time: 1175773721,
+        type: "comment"
+    },
+    {
+        by: "JMiao",
+        id: 9235,
+        parent: 9153,
+        text: `Your Drop Box is a File Cabinet that Follows You Around Everywhere You Want to Go, Across Your Computers, or Across The Country."<p>Ladies & Gentlemen, the WORLD\'S LIGHTEST FILE CABINET. 
+        Great for cross-country roadtrips! =)`,
+        time: 1175788206,
+        type: "comment"
+    }
+
+]
+
+let i =0;
+
 class NewStoryApi {
 
     static async getAllStories(category) {
@@ -121,11 +169,26 @@ class NewStoryApi {
         }
         
     }
+    
+    static async getContentId(id, type) {
+        switch(type) {
+            case 'story':
+                return this.getStoryId(id);
+            default:
+                return this.getComment(i++);
+        }
+    }
 
     static async getStoryId(id) {
         return new Promise(resolve => setTimeout(() => {
             resolve(stories[0]);
         }, delay));
+    }
+
+    static async getComment(id) {
+        return new Promise(resolve => setTimeout(() => {
+            resolve(comments[id]);
+        }));
     }
 
     static async getItems(ids) {

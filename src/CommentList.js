@@ -14,7 +14,7 @@ export class CommentList extends Component {
             by: '',
             id: 0,
             kids: [],
-            parent:'',
+            parent:0,
             text: '',
             time: 0,
             type: '',
@@ -28,7 +28,7 @@ export class CommentList extends Component {
     }
 
     fetchSpecificItem(id) {
-        NewStoryApi.getStoryId(id)
+        NewStoryApi.getContentId(id, 'comment')
             .then((detail) => {
                 this.setState({
                     ...detail,

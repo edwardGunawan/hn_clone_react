@@ -8,7 +8,7 @@ const parse = require('url-parse');
 
 
 export const NewList = (props) => {
-    const {by, descendants, time, title, url, score, id} = props;
+    const {by, descendants, time, title, url, score, id} = props.obj;
     const url_parse = parse(url);
     return (
         <div>
@@ -20,12 +20,15 @@ export const NewList = (props) => {
 }
 
 NewList.propTypes = {
-    by: PropTypes.string.isRequired,
-    descendants: PropTypes.number.isRequired,
-    time: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    score: PropTypes.number.isRequired,
+    obj: PropTypes.shape({
+        by: PropTypes.string.isRequired,
+        descendants: PropTypes.number.isRequired,
+        time: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        score: PropTypes.number.isRequired,
+    }).isRequired,
+    
 }
 export default NewList;

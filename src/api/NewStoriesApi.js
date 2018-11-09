@@ -20,7 +20,7 @@ export default {
      * @param {Number} id 
      * Get stories Id HackerNews API stories, and return the function call
      */
-    async getStoryId(id) {
+    async getContentId(id) {
         return fetch(`${endPoint}/item/${id}.json/print=pretty`);
     },
 

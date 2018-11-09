@@ -6,38 +6,37 @@ import { NewList } from './NewList';
 
 configure({ adapter: new Adapter() });
 
-const oneNews = {
-    by: "irsina",
-    descendants: 17,
-    id: 18265074,
-    kids: [
-        18265466,
-        18265435,
-        18265196,
-        18265226,
-        18265502,
-        18265313
-    ],
-    score: 102,
-    time: 1540065131,
-    title: "Show HN: Lipreading with Deep Learning",
-    type: "story",
-    url: "https://github.com/astorfi/lip-reading-deeplearning"
+function createTestProps(props) {
+    return {
+        obj: {
+            by: "irsina",
+            descendants: 17,
+            id: 18265074,
+            kids: [
+                18265466,
+                18265435,
+                18265196,
+                18265226,
+                18265502,
+                18265313
+            ],
+            score: 102,
+            time: 1540065131,
+            title: "Show HN: Lipreading with Deep Learning",
+            type: "story",
+            url: "https://github.com/astorfi/lip-reading-deeplearning"
+        },
+        ...props,
+    }
 }
 
 describe('NewList Component', () => {
     let wrapper;
-    const { by, descendants, kids, time, title, type, url, score,id } = oneNews;
+    let props;
+
     beforeEach(() => {
-        wrapper = shallow(<NewList by={by}
-            descendants={descendants}
-            kids={kids}
-            time={time}
-            title={title}
-            id={id}
-            type={type}
-            score={score}
-            url={url} />);
+        props = createTestProps();
+        wrapper = shallow(<NewList {...props} />);
     });
 
     it('should render <div/>', () => {
