@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ItemList from './ItemList';
-import NewList from './NewList';
+import Title from './Title';
 
 import { withRouter } from 'react-router-dom';
 
@@ -50,7 +50,7 @@ export class Item extends Component {
         const {kids} = details;
         return (
             <div>
-                <NewList obj={details} /> 
+                <Title obj={details} /> 
                 <ItemList kids={kids} /> 
             </div>
         )

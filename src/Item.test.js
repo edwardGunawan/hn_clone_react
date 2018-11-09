@@ -30,9 +30,9 @@ describe('Item Component', () => {
         expect(fetchSpecificStoryMock).toHaveBeenCalled();
     });
 
-    // it('should render NewLists component as Title if the component is not a comment type', () => {
+    // it('should render Titles component as Title if the component is not a comment type', () => {
     //     wrapper.setState({ type:'story' })
-    //     expect(wrapper.find('NewList')).toHaveLength(1);
+    //     expect(wrapper.find('Title')).toHaveLength(1);
     //     expect(wrapper.find('ItemList')).toHaveLength(0);
     // })
 
@@ -41,7 +41,7 @@ describe('Item Component', () => {
     //       type:'comment',
     //     });
     //     // console.log(wrapper.state());
-    //     expect(wrapper.find('NewList')).toHaveLength(0);
+    //     expect(wrapper.find('Title')).toHaveLength(0);
     //     expect(wrapper.find('ItemList')).toHaveLength(1);
     // })
 

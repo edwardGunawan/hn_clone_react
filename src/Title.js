@@ -7,7 +7,7 @@ const TimeAgo = require('react-timeago').default;
 const parse = require('url-parse');
 
 
-export const NewList = (props) => {
+export const Title = (props) => {
     const {by, descendants, time, title, url, score, id} = props.obj;
     const url_parse = parse(url);
     return (
@@ -19,7 +19,7 @@ export const NewList = (props) => {
     )
 }
 
-NewList.propTypes = {
+Title.propTypes = {
     obj: PropTypes.shape({
         by: PropTypes.string.isRequired,
         descendants: PropTypes.number.isRequired,
@@ -31,4 +31,4 @@ NewList.propTypes = {
     }).isRequired,
     
 }
-export default NewList;
+export default Title;

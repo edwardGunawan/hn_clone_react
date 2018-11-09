@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import NewList from './NewList';
+import Title from './Title';
 import CommentList from './CommentList';
 
 const ItemList = ({kids}) => {

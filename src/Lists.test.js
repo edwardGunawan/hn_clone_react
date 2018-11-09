@@ -3,7 +3,7 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Lists from './Lists';
-import NewList from './NewList';
+import Title from './Title';
 
 configure({adapter: new Adapter()});
 
@@ -53,13 +53,13 @@ describe('Lists Component', () => {
         expect(wrapper.find('div').length).toEqual(1);
     });
 
-    it('should render 2 NewList Component', () => {
+    it('should render 2 Title Component', () => {
         // console.log(wrapper.children().debug());
         wrapper.forEach((node,i) => {
             const item = news[i];
             // const { by, descendants, kids, time, title, type, url, score, id } = item;
             expect(node.find('ol').children().containsMatchingElement(
-                <NewList obj={item} />
+                <Title obj={item} />
                     )).toEqual(true);
         });
         

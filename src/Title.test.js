@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import { NewList } from './NewList';
+import { Title } from './Title';
 
 configure({ adapter: new Adapter() });
 
@@ -30,13 +30,13 @@ function createTestProps(props) {
     }
 }
 
-describe('NewList Component', () => {
+describe('Title Component', () => {
     let wrapper;
     let props;
 
     beforeEach(() => {
         props = createTestProps();
-        wrapper = shallow(<NewList {...props} />);
+        wrapper = shallow(<Title {...props} />);
     });
 
     it('should render <div/>', () => {

@@ -12,7 +12,7 @@ export default {
      *  Get endpoint HackerNews API stories, and return its id
      */
     async getAllStories(category) {
-        return fetch(`${endPoint}/${category}.json/print=pretty`);
+        return fetch(`${this.endPoint}/${category}.json/print=pretty`);
     },
 
     /**
@@ -21,7 +21,7 @@ export default {
      * Get stories Id HackerNews API stories, and return the function call
      */
     async getContentId(id) {
-        return fetch(`${endPoint}/item/${id}.json/print=pretty`);
+        return fetch(`${this.endPoint}/item/${id}.json/print=pretty`);
     },
 
     /**
