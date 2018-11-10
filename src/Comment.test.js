@@ -38,4 +38,6 @@ describe('Comment Container', () => {
     // it('should match snapshot', () => {
     //     expect(wrapper).toMatchSnapshot();
     // })
-})
+});
+
+// set integration test here

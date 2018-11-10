@@ -30,11 +30,8 @@ export class CommentList extends Component {
 
     fetchSpecificItem(id) {
         NewStoryApi.getContentId(id, 'comment')
-            .then((detail) => {
-                this.setState({
-                    ...detail,
-                });
-                console.log(detail)
+            .then((obj) => {
+                if(obj) this.setState({ obj });
             })
             .catch(e => console.log('error in fetchSpecificStory ', e));
     }
@@ -45,7 +42,9 @@ export class CommentList extends Component {
         return (
             <div>
                 <Comment obj={obj}/>
-                {kids.length > 0 && <ItemList kids={kids} />}
+                <div>
+                    {typeof (kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} />}
+                </div>
             </div>
         )
     }

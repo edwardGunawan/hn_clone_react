@@ -40,10 +40,12 @@ export class Item extends Component {
 
 
     fetchSpecificStory(id) {
-        NewStoryApi.getContentId(id, 'story')
-            .then((detail) => {
-                this.setState({ detail });
-                console.log(detail)
+        let content = (this.props.history.location.pathname === '/item') ? 'story': 'comment';
+        // console.log('in item.js beforeGetContentId', content);
+        NewStoryApi.getContentId(id, content)
+            .then((details) => {
+                if(details) this.setState({ details });
+                // console.log('in item.js in then getContentId function', details);
             })
             .catch(e => console.log('error in fetchSpecificStory ', e));
     }
@@ -51,6 +53,7 @@ export class Item extends Component {
     render() {
         const {details} = this.state;
         const {kids, type} = details;
+        // console.log('the type in itemjs is ', type);
         return (
             <div>
                 {type === 'comment' ? <Comment obj={details}/> : 

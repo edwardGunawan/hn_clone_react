@@ -50,7 +50,7 @@ describe('CommentList Component', () => {
     });
 
     it ('should render', () => {
-        expect(wrapper.find('div').length).toEqual(1);
+        expect(wrapper.length).toEqual(1);
     });
 
     it('should call fetchSpecificItemMock function on componentDidMount', () => {
@@ -60,7 +60,7 @@ describe('CommentList Component', () => {
     it('should contain Comment Component', () => {
         const props = createTestProps({},'comment');
         const {obj} = props;
-        expect(wrapper.containsMatchingElement(<div><Comment obj={obj} /></div>)).toEqual(true);
+        expect(wrapper.containsMatchingElement(<Comment obj={obj} />)).toEqual(true);
     });
 
     it('should contain ItemList Component if kids is not empty', () => {

@@ -148,7 +148,8 @@ const comments = [
 
 ]
 
-let i =0;
+let commentId =0;
+let storyId = 0;
 
 class NewStoryApi {
 
@@ -171,17 +172,23 @@ class NewStoryApi {
     }
     
     static async getContentId(id, type) {
+        if(storyId >= stories.length) {
+            storyId = 0;    
+        }
+        if(commentId >= comments.length) {
+            commentId = 0;
+        }
         switch(type) {
             case 'story':
-                return this.getStoryId(id);
+                return this.getStoryId(storyId++);
             default:
-                return this.getComment(i++);
+                return this.getComment(commentId++);
         }
     }
 
     static async getStoryId(id) {
         return new Promise(resolve => setTimeout(() => {
-            resolve(stories[0]);
+            resolve(stories[id]);
         }, delay));
     }
 
