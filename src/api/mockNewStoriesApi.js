@@ -1,5 +1,4 @@
 import delay from './delay';
-import { readFileSync, readFile, readdir } from 'fs';
 
 const folder = './mockHNApi';
 
@@ -150,33 +149,16 @@ const comments = [
 
 ]
 
-readdir(folder,(err, items) => {
-    console.log(err);
-    console.log(items);
-
-    items.forEach((item) => {
-        console.log(item);
-    })
-})
-
 // let commentId =0;
 // let storyId = 0;
 
 class NewStoryApi {
 
     static async get(category) {
-        // console.log('get is called');
         try {
             const idsPromise = new Promise((resolve, reject) => {
-                // console.log(`${folder}/${category}.json`);
-                // console.log(readFileSync(`${folder}/${category}.json`));
                 setTimeout(() => {
-                    console.log(readFile(`${folder}/${category}.json`, 'utf8', (err, data) => {
-                        if(err) reject(err);
-                        resolve(data);
-                    }));
-                    // console.log(obj);
-                    // resolve([1,2,3,4]);
+                    resolve(require(`${folder}/${category}`));
                 }, delay);
             });
 
@@ -191,7 +173,7 @@ class NewStoryApi {
     
     static async getContentId(id) {
         return new Promise(resolve => setTimeout(() => {
-            resolve(JSON.parse(readFileSync(`${folder}/${id}.json`,'utf8')));
+            resolve(require(`${folder}/${id}.json`));
         },delay));
         
 
@@ -222,11 +204,9 @@ class NewStoryApi {
     }
 
     static async getItems(ids) {
-        await Promise.all(ids.map(async (id) => {
+        return  Promise.all(ids.map(async (id) => {
             return this.getContentId(id);
         }));
-
-        return stories;
     }
 
 }

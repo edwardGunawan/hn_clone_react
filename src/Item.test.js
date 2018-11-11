@@ -61,6 +61,18 @@ describe('Item Component', () => {
         }});
         expect(wrapper.find('Title')).toHaveLength(0);
         expect(wrapper.find('Comment')).toHaveLength(1);
+    });
+
+    describe('Comment has not kids anymore or kids is undefined', () => {
+        it('should not render ItemList Component', () => {
+            wrapper.setState({
+                details: {
+                    ...wrapper.state('details'),
+                    kids:[]
+                }
+            });
+            expect(wrapper.find('ItemList')).toHaveLength(0);
+        });
     })
 
     afterEach(() => {

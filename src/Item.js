@@ -58,7 +58,7 @@ export class Item extends Component {
             <div>
                 {type === 'comment' ? <Comment obj={details}/> : 
                 <Title obj={details} /> }
-                <ItemList kids={kids} /> 
+                {typeof(kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} /> }
             </div>
         )
     }

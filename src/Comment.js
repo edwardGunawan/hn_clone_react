@@ -11,7 +11,7 @@ const Comment = ({obj}) => {
     return (
         <div>
             <h6>{by} <TimeAgo date={time * 1000} /> | <Link to={`/comment/detail?id=${id}`}>link</Link></h6>
-            <div>{text}</div>
+            <div dangerouslySetInnerHTML={{__html:text}}/>
             <p><a href={`https://news.ycombinator.com/reply?id=${id}`}>reply</a></p>
         </div>
     )
