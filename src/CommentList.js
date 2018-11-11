@@ -29,7 +29,7 @@ export class CommentList extends Component {
     }
 
     fetchSpecificItem(id) {
-        NewStoryApi.getContentId(id, 'comment')
+        NewStoryApi.getContentId(id)
             .then((obj) => {
                 if(obj) this.setState({ obj });
             })

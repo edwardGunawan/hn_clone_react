@@ -21,7 +21,7 @@ export class NewContainer extends Component {
     }
 
     fetchAllStories() {
-        NewStoryApi.getAllStories('newstories')
+        NewStoryApi.get('newstories')
             .then((ids) => {
                 return NewStoryApi.getItems(ids);
             })

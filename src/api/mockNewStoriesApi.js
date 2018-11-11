@@ -1,5 +1,7 @@
 import delay from './delay';
-import { defaultCipherList } from 'constants';
+import { readFileSync, readFile, readdir } from 'fs';
+
+const folder = './mockHNApi';
 
 export const storiesId = [1,2,3,4,5,6,7]
 
@@ -148,42 +150,63 @@ const comments = [
 
 ]
 
-let commentId =0;
-let storyId = 0;
+readdir(folder,(err, items) => {
+    console.log(err);
+    console.log(items);
+
+    items.forEach((item) => {
+        console.log(item);
+    })
+})
+
+// let commentId =0;
+// let storyId = 0;
 
 class NewStoryApi {
 
-    static async getAllStories(category) {
-        // console.log('getAllStories is called');
+    static async get(category) {
+        // console.log('get is called');
         try {
-            const storiesIdPromise = new Promise((resolve) => {
+            const idsPromise = new Promise((resolve, reject) => {
+                // console.log(`${folder}/${category}.json`);
+                // console.log(readFileSync(`${folder}/${category}.json`));
                 setTimeout(() => {
-                    resolve(storiesId)
+                    console.log(readFile(`${folder}/${category}.json`, 'utf8', (err, data) => {
+                        if(err) reject(err);
+                        resolve(data);
+                    }));
+                    // console.log(obj);
+                    // resolve([1,2,3,4]);
                 }, delay);
             });
 
             // const stories = await prom();
             // mocking return all stories
-            return storiesIdPromise;
+            return idsPromise;
         } catch(e) {
             console.log('error  in newStory Api', e );
         }
         
     }
     
-    static async getContentId(id, type) {
-        if(storyId >= stories.length) {
-            storyId = 0;    
-        }
-        if(commentId >= comments.length) {
-            commentId = 0;
-        }
-        switch(type) {
-            case 'story':
-                return this.getStoryId(storyId++);
-            default:
-                return this.getComment(commentId++);
-        }
+    static async getContentId(id) {
+        return new Promise(resolve => setTimeout(() => {
+            resolve(JSON.parse(readFileSync(`${folder}/${id}.json`,'utf8')));
+        },delay));
+        
+
+        // if(storyId >= stories.length) {
+        //     storyId = 0;    
+        // }
+        // if(commentId >= comments.length) {
+        //     commentId = 0;
+        // }
+        // switch(type) {
+        //     case 'story':
+        //         return this.getStoryId(storyId++);
+        //     default:
+        //         return this.getComment(commentId++);
+        // }
     }
 
     static async getStoryId(id) {
@@ -200,11 +223,12 @@ class NewStoryApi {
 
     static async getItems(ids) {
         await Promise.all(ids.map(async (id) => {
-            return this.getStoryId(id);
+            return this.getContentId(id);
         }));
 
         return stories;
     }
+
 }
 
 

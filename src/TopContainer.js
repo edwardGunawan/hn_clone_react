@@ -17,7 +17,7 @@ export class TopContainer extends Component {
     }
 
     fetchTopStories() {
-        NewStoryApi.getAllStories('topstories')
+        NewStoryApi.get('topstories')
         .then((storiesId) => {
             console.log('storiesId', storiesId);
             return NewStoryApi.getItems(storiesId);

@@ -42,7 +42,7 @@ export class Item extends Component {
     fetchSpecificStory(id) {
         let content = (this.props.history.location.pathname === '/item') ? 'story': 'comment';
         // console.log('in item.js beforeGetContentId', content);
-        NewStoryApi.getContentId(id, content)
+        NewStoryApi.getContentId(id)
             .then((details) => {
                 if(details) this.setState({ details });
                 // console.log('in item.js in then getContentId function', details);

@@ -11,7 +11,7 @@ export default {
     /**
      *  Get endpoint HackerNews API stories, and return its id
      */
-    async getAllStories(category) {
+    async get(category) {
         return fetch(`${this.endPoint}/${category}.json/print=pretty`);
     },
 
@@ -32,7 +32,7 @@ export default {
     async getItems(ids) {
         // let ids run concurrently
         return Promise.all(ids.map(async (id) => {
-            return this.getStoriesId(id);
+            return this.getContentId(id);
         }));
     }
 
