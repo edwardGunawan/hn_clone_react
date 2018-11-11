@@ -1,5 +1,5 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
+import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CommentList from './CommentList';
 import Comment from './Comment';
@@ -29,7 +29,10 @@ function createTestProps(props={}, name) {
                 kid: 18263752,
             }
     }
-    
+}
+
+function createWrapper(props, fn) {
+    return fn(<CommentList {...props} />);
 }
 
 describe('CommentList Component', () => {
@@ -46,41 +49,55 @@ describe('CommentList Component', () => {
     beforeEach(()=> {
         props = createTestProps();
         fetchSpecificItemMock = jest.spyOn(CommentList.prototype, 'fetchSpecificItem');
-        wrapper = shallow(<CommentList {...props}/>);
+        wrapper = createWrapper(props,shallow);
     });
 
-    it ('should render', () => {
-        expect(wrapper.length).toEqual(1);
+    describe('rendering', () => {
+        it('renders 1 wrapper', () => {
+            expect(wrapper.length).toEqual(1);
+        });
+        it('calls fetchSpecificItemMock function on componentDidMount', () => {
+            expect(fetchSpecificItemMock).toHaveBeenCalled();
+        });
+        it('contains Comment Component', () => {
+            const props = createTestProps({}, 'comment');
+            const { obj } = props;
+            expect(wrapper.containsMatchingElement(<Comment obj={obj} />)).toEqual(true);
+        });
     });
 
-    it('should call fetchSpecificItemMock function on componentDidMount', () => {
-        expect(fetchSpecificItemMock).toHaveBeenCalled();
+    describe('when obj property kids is not empty in fetched item', () => {
+        beforeEach(() => {
+            wrapper.setState({
+                obj: {
+                    ...wrapper.state('obj'),
+                    kids: mockKids,
+                }
+            });
+        });
+        it('contains ItemList Component if kids is not empty', () => {
+            expect(wrapper.find('ItemList')).toHaveLength(1);
+        });
     });
 
-    it('should contain Comment Component', () => {
-        const props = createTestProps({},'comment');
-        const {obj} = props;
-        expect(wrapper.containsMatchingElement(<Comment obj={obj} />)).toEqual(true);
-    });
+    describe('when obj property kids is empty in the fetched item', () => {
+        beforeEach(() => {
+            wrapper.setState({
+                obj: {
+                    ...wrapper.state('obj'),
+                    kids: [],
+                }
+            });
+        })
+        it('doesn\'t contain ItemList Component if kids is empty', () => {
+            expect(wrapper.find('ItemList')).toHaveLength(0);
+        });
 
-    it('should contain ItemList Component if kids is not empty', () => {
-        wrapper.setState({ obj :{
-            ...wrapper.state('obj'),
-            kids: mockKids,
-        }});
-        expect(wrapper.find('ItemList')).toHaveLength(1);
-    });
-
-    it('should not contain ItemList Component if kids is empty', () => {
-        wrapper.setState({ obj: {
-            ...wrapper.state('obj'),
-            kids: [],
-        }});
-        expect(wrapper.find('ItemList')).toHaveLength(0);
     });
 
     afterAll(() => {
         fetchSpecificItemMock.mockClear();
-    })
+    });
 
 });
+

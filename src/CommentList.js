@@ -42,7 +42,7 @@ export class CommentList extends Component {
         return (
             <div>
                 <Comment obj={obj}/>
-                <div>
+                <div style={{textIndent:'5%'}}>
                     {typeof (kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} />}
                 </div>
             </div>
