@@ -24,16 +24,19 @@ describe('Comment Container', () => {
     let wrapper;
     let props;
 
+    const createWrapper = (props,fn) => fn(<Comment {...props}/>);
+
     beforeEach(() => {
         props = createTestProps();
-        wrapper = shallow(<Comment {...props}/>);
-        
-    })
+        wrapper = createWrapper(props, shallow);
 
-    it('should render 2 div, one outer and one on the text section', () => {
-        expect(wrapper.find('div').length).toEqual(2);
     });
 
+    describe('renders', () => {
+        it('should render 2 div, one outer and one on the text section', () => {
+            expect(wrapper.find('div').length).toEqual(2);
+        });
+    })
 
     // it('should match snapshot', () => {
     //     expect(wrapper).toMatchSnapshot();
