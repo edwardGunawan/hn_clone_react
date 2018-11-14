@@ -52,6 +52,24 @@ describe('CommentList Component', () => {
         wrapper = createWrapper(props,shallow);
     });
 
+    describe('initialState', () => {
+        it('should have state of obj', () => {
+            expect(wrapper.state().obj).toEqual({
+                by: '',
+                id: 0,
+                kids: [],
+                parent: 0,
+                text: '',
+                time: 0,
+                type: '',
+            });
+        });
+
+        it('should contain isExpand of true', () => {
+            expect(wrapper.state().isExpand).toEqual(true);
+        })
+    })
+
     describe('rendering', () => {
         it('renders 1 wrapper', () => {
             expect(wrapper.length).toEqual(1);
@@ -94,6 +112,102 @@ describe('CommentList Component', () => {
         });
 
     });
+
+    describe('Comment has no kids anymore or kids is undefined', () => {
+        it('should not render ItemList Component', () => {
+            wrapper.setState({
+                details: {
+                    ...wrapper.state('details'),
+                    kids: []
+                }
+            });
+            expect(wrapper.find('ItemList')).toHaveLength(0);
+        });
+    });
+
+    describe('Expandable button', () => {
+        describe('when comment does\'t have any children', () => {
+            it('should not show expand button', () => {
+                expect(wrapper.find('span')).toHaveLength(0);
+            });
+        });
+
+        describe('When comment have some sub-comment, that comment', () => {
+            beforeEach(() => {
+                wrapper.setState({
+                    obj: {
+                        ...wrapper.state('obj'),
+                        type: 'comment',
+                        kids: mockKids,
+                    },
+                });
+            });
+            it('should show expand button', () => {
+                expect(wrapper.find('span')).toHaveLength(1);
+            })
+        })
+
+        describe('clicking expandable button', () => {
+            describe('when user click [+] button', () => {
+                beforeEach(() => {
+                    wrapper.setState({
+                        obj: {
+                            ...wrapper.state('obj'),
+                            type: 'comment',
+                            kids: mockKids,
+                        },
+                        isExpand: false,
+                    });
+                    wrapper.find('span').simulate('click');
+                });
+                it('should show ItemList', () => {
+                    expect(wrapper.find('ItemList')).toHaveLength(1);
+                });
+            });
+            describe('when user click [-] button', () => {
+                beforeEach(() => {
+                    wrapper.setState({
+                        obj: {
+                            ...wrapper.state('obj'),
+                            type: 'comment',
+                            kids: mockKids,
+                        },
+                        isExpand: true,
+                    });
+                    wrapper.find('span').simulate('click');
+                });
+
+                it('should not show ItemList', () => {
+                    expect(wrapper.find('ItemList')).toHaveLength(0);
+                });
+            });
+        });
+    });
+
+    describe('handleToggleExpand button', () => {
+        let handleToggleExpand;
+
+
+        describe('when call handleToggleExpand', () => {
+            beforeEach(() => {
+                handleToggleExpand = wrapper.instance().handleToggleExpand;
+                wrapper.setState({ isExpand: false });
+            });
+            it('should toggle isExpand from false to true', () => {
+                handleToggleExpand();
+                expect(wrapper.state().isExpand).toEqual(true);
+            });
+
+            describe('when calling handleToggleExpand twice', () => {
+                it('should toggle isExpand from false to true to false', () => {
+                    handleToggleExpand(); // call once
+                    handleToggleExpand(); // call twice
+
+                    expect(wrapper.state().isExpand).toEqual(false);
+                });
+            })
+        })
+    })
 
     afterAll(() => {
         fetchSpecificItemMock.mockClear();

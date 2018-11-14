@@ -27,7 +27,7 @@ export class Item extends Component {
                 score: 0,
                 url: '',
                 id: 0,
-            }
+            },
         }
     }
 

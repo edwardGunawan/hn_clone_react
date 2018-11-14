@@ -10,6 +10,7 @@ export class CommentList extends Component {
     constructor(props) {
         super(props);
         this.fetchSpecificItem = this.fetchSpecificItem.bind(this);
+        this.handleToggleExpand = this.handleToggleExpand.bind(this);
         this.state = {
             obj: {
                 by: '',
@@ -20,6 +21,7 @@ export class CommentList extends Component {
                 time: 0,
                 type: '',
             },
+            isExpand:true,
         }
     }
 
@@ -36,14 +38,23 @@ export class CommentList extends Component {
             .catch(e => console.log('error in fetchSpecificStory ', e));
     }
 
+    handleToggleExpand(e) {
+        this.setState(prevState => ({
+            isExpand: !prevState.isExpand
+        }));
+    }
+
     render() {
-        const {obj} = this.state;
+        const {obj,isExpand} = this.state;
         const {kids} = obj;
         return (
             <div>
-                <Comment obj={obj}/>
+                <div>
+                    {typeof (kids) !== 'undefined' && kids.length && <span onClick={this.handleToggleExpand}>[{isExpand ? '-' : '+'}]</span>} <Comment obj={obj} />
+                </div>
+                
                 <div style={{textIndent:'5%'}}>
-                    {typeof (kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} />}
+                    {isExpand && typeof (kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} />}
                 </div>
             </div>
         )
