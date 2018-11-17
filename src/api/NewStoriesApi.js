@@ -34,6 +34,24 @@ export default {
         return Promise.all(ids.map(async (id) => {
             return this.getContentId(id);
         }));
+    },
+
+    /**
+     * 
+     * @param {Object} contentObject
+     * Count the ancestor of the current object
+     */
+    async getParentCount(contentObject) {
+        let { parent } = contentObject;
+        let count = 1;
+
+        while (typeof (parent) !== 'undefined' && parent !== null) {
+            let parentObj = await this.getContentId(parent);
+            parent = parentObj['parent'];
+            count++;
+        }
+
+        return count;
     }
 
 

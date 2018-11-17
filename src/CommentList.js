@@ -21,6 +21,7 @@ export class CommentList extends Component {
                 time: 0,
                 type: '',
             },
+            numIndent:1,
             isExpand:true,
         }
     }
@@ -34,6 +35,10 @@ export class CommentList extends Component {
         NewStoryApi.getContentId(id)
             .then((obj) => {
                 if(obj) this.setState({ obj });
+                return NewStoryApi.getParentCount(obj);
+            })
+            .then((numIndent) => {
+                this.setState({numIndent})
             })
             .catch(e => console.log('error in fetchSpecificStory ', e));
     }
@@ -45,15 +50,18 @@ export class CommentList extends Component {
     }
 
     render() {
-        const {obj,isExpand} = this.state;
+        const {obj,isExpand,numIndent} = this.state;
         const {kids} = obj;
+        const indentStyle = {
+            textIndent: `${3 * numIndent}%`,
+        }
         return (
             <div>
                 <div>
                     {typeof (kids) !== 'undefined' && kids.length && <span onClick={this.handleToggleExpand}>[{isExpand ? '-' : '+'}]</span>} <Comment obj={obj} />
                 </div>
                 
-                <div style={{textIndent:'5%'}}>
+                <div style={indentStyle}>
                     {isExpand && typeof (kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} />}
                 </div>
             </div>
