@@ -5,8 +5,8 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {MemoryRouter} from 'react-router-dom';
 
-import Header from './Header';
-import Main from './Main';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
 
 configure({adapter: new Adapter()});
 

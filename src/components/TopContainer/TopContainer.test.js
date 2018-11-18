@@ -2,9 +2,8 @@ import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {TopContainer} from './TopContainer';
-import Lists from './Lists';
-import {stories} from './api/mockNewStoriesApi';
+import {TopContainer} from '../TopContainer/TopContainer';
+import Lists from '../Lists/Lists';
 
 // console.log(stories);
 configure({adapter: new Adapter()});

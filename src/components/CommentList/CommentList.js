@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import NewStoryApi from './api/mockNewStoriesApi';
-import Comment from './Comment';
-import ItemList from './ItemList';
+import NewStoryApi from '../../api/mockNewStoriesApi';
+import Comment from '../Comment/Comment';
+import ItemList from '../ItemList/ItemList';
 
 export class CommentList extends Component {
 

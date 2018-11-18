@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import ItemList from './ItemList';
-import Title from './Title';
-import Comment from './Comment';
+import ItemList from '../ItemList/ItemList';
+import Title from '../Title/Title';
+import Comment from '../Comment/Comment';
 
 import { withRouter } from 'react-router-dom';
 
-import NewStoryApi from './api/mockNewStoriesApi';
+import NewStoryApi from '../../api/mockNewStoriesApi';
 
 
 

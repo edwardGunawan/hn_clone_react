@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Lists from './Lists';
+import Lists from '../Lists/Lists';
 
 import {withRouter} from 'react-router-dom';
 
-import NewStoryApi from './api/mockNewStoriesApi';
+import NewStoryApi from '../../api/mockNewStoriesApi';
 
 export class NewContainer extends Component {
     constructor(props) {

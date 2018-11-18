@@ -3,7 +3,7 @@ import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import {NewContainer } from './NewContainer';
-import Main from './Main';
+import Main from '../Main/Main';
 import { MemoryRouter } from 'react-router-dom';
 
 const stories = [

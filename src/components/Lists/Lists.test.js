@@ -3,7 +3,7 @@ import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import Lists from './Lists';
-import Title from './Title';
+import Title from '../Title/Title';
 
 configure({adapter: new Adapter()});
 

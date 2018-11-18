@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import CommentList from './CommentList';
+import CommentList from '../CommentList/CommentList';
 
 const ItemList = ({kids}) => {
     // TODO: do another fetch over on teach of the kids it if has one

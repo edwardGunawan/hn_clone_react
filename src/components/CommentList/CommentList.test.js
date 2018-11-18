@@ -2,7 +2,7 @@ import React from 'react';
 import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CommentList from './CommentList';
-import Comment from './Comment';
+import Comment from '../Comment/Comment';
 
 configure({adapter: new Adapter()});
 

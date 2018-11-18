@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
-import Lists from './Lists';
+import Lists from '../Lists/Lists';
 
-import NewStoryApi from './api/mockNewStoriesApi';
+import NewStoryApi from '../../api/mockNewStoriesApi';
 
 export class TopContainer extends Component {
     constructor(props) {

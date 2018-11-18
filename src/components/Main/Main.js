@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import NewContainer from './NewContainer';
-import ShowContainer from './ShowContainer';
-import AskContainer from './AskContainer';
-import CommentContainer from './CommentContainer';
-import JobsContainer from './JobsContainer';
-import TopContainer from './TopContainer';
-import Item from './Item';
+import NewContainer from '../NewContainer/NewContainer';
+import ShowContainer from '../ShowContainer/ShowContainer';
+import AskContainer from '../AskContainer/AskContainer';
+import CommentContainer from '../CommentContainer/CommentContainer';
+import JobsContainer from '../JobsContainer/JobsContainer';
+import TopContainer from '../TopContainer/TopContainer';
+import Item from '../Item/Item';
 
 // https://stackoverflow.com/questions/47804798/how-to-re-render-the-same-component-being-used-in-different-routes
 // NOTE: key value in re-render same component in 2 router, but usually use HOC to pass in the data and render that data

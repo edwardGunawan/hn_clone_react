@@ -4,8 +4,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import ItemList from './ItemList';
-import CommentList from './CommentList';
+import ItemList from '../ItemList/ItemList';
+import CommentList from '../CommentList/CommentList';
 
 
 describe('ItemList component', () => {
