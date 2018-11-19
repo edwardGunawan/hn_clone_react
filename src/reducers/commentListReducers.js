@@ -5,7 +5,7 @@ export default function commentListReducers(state = initialState.commentLists, a
         case types.FETCH_SPECIFIC_COMMENT_LIST:
             return [
                 ...state,
-                Object.assign({},{...action.details}),
+                Object.assign({},{...action.details}), // NOTE: This needs to normalized
                 
             ]
         // case types.SET_NUM_INDENT:
