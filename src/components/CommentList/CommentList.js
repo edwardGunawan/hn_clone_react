@@ -5,30 +5,39 @@ import NewStoryApi from '../../api/mockNewStoriesApi';
 import Comment from '../Comment/Comment';
 import ItemList from '../ItemList/ItemList';
 
+import { connect } from 'react-redux';
+import * as commentListActions from '../../actions/commentListActions';
+
 export class CommentList extends Component {
 
     constructor(props) {
         super(props);
         this.fetchSpecificItem = this.fetchSpecificItem.bind(this);
         this.handleToggleExpand = this.handleToggleExpand.bind(this);
+        console.log(props);
         this.state = {
-            obj: {
-                by: '',
-                id: 0,
-                kids: [],
-                parent: 0,
-                text: '',
-                time: 0,
-                type: '',
-            },
-            numIndent:1,
-            isExpand:true,
+            obj: Object.assign({},props.obj),
+            numIndent: props.numIndent,
+            isExpand: props.isExpand,
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.obj !== nextProps.obj) {
+            this.setState({obj : Object.assign({},nextProps.obj)});
+        }
+        if(this.props.numIndent !== nextProps.numIndent) {
+            this.setState({numIndent : nextProps.numIndent});
+        }
+
+        if(this.props.isExpand !== nextProps.isExpand) {
+            this.setState({isExpand: nextProps.isExpand});
         }
     }
 
     componentDidMount() {
         const {kid} = this.props;
-        this.fetchSpecificItem(kid);
+        this.props.fetchSpecificItem(kid);
     }
 
     fetchSpecificItem(id) {
@@ -51,6 +60,7 @@ export class CommentList extends Component {
 
     render() {
         const {obj,isExpand,numIndent} = this.state;
+        console.log(obj, isExpand, numIndent);
         const {kids} = obj;
         const indentStyle = {
             textIndent: `${3 * numIndent}%`,
@@ -75,4 +85,20 @@ CommentList.propTypes = {
     kid: PropTypes.number.isRequired,
 }
 
-export default CommentList;
+const mapStateToProps = (state) => {
+    const {obj, numIndent, isExpand} = state.commentList;
+    return {
+        obj,
+        numIndent,
+        isExpand,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchSpecificItem: id => dispatch(commentListActions.fetchSpecificStory(id)),
+        handleToggleExpand: () => dispatch(commentListActions.toggleExpand()),
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CommentList);

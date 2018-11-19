@@ -3,33 +3,20 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Lists from '../Lists/Lists';
 
-import * as topActions from '../../actions/topActions';
-import NewStoryApi from '../../api/mockNewStoriesApi';
-
 export class TopContainer extends Component {
-    constructor(props) {
-        super(props);
-        // this.state = {
-        //     stories: [],
-        // }
-        // this.fetchTopStories = this.fetchTopStories.bind(this);
-    }
-    componentDidMount() {
-        this.props.fetchTopStories();
+    constructor(props,context) {
+        super(props,context);
+        this.state = Object.assign({}, props.topStories);
     }
 
-    fetchTopStories() {
-        NewStoryApi.get('topstories')
-        .then((storiesId) => {
-            return NewStoryApi.getItems(storiesId);
-        })
-        .then((stories) => {
-            this.setState({stories});
-        })
-        .catch(e => console.log(e));
+    componentWillReceiveProps(nextProps) {
+        if(this.props.topStories !== nextProps.topStories) {
+            this.setState({stories: [...nextProps.topStories.stories]});
+        }
     }
+
     render() {
-        const {stories} = this.props.topStories;
+        const {stories} = this.state;
         return (
             <div>
                 <Lists news={stories}/>
@@ -42,12 +29,6 @@ export class TopContainer extends Component {
 // is just one of the object
 const mapStateToProps = (state) => ({
     topStories:state.topStories, // NOTE: this will render as props instead of using this.state
-})
+});
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchTopStories: () => dispatch(topActions.loadStories()),
-    }
-}
-
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(TopContainer));
+export default withRouter(connect(mapStateToProps)(TopContainer));

@@ -7,9 +7,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
 import { loadStories } from './actions/topActions';
+import { loadNewStories } from './actions/newActions';
 
 const store = configureStore();
-store.dispatch(loadStories());
+// we load the initial render for all the get method here
+store.dispatch(loadStories()); 
+store.dispatch(loadNewStories());
 
 ReactDOM.render(
     <Provider store={store}>

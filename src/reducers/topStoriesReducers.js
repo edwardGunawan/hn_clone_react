@@ -1,9 +1,10 @@
 import * as types from '../actions/actionTypes';
+import initialState from './initialState';
 
 // state = {
 //     stories: []
 // }
-export default function topStoriesReducers(state={stories:[],}, action) {
+export default function topStoriesReducers(state=initialState.topStories, action) {
     switch(action.type) {
         case types.START_REQUEST:
             return {

@@ -5,29 +5,24 @@ import Title from '../Title/Title';
 import Comment from '../Comment/Comment';
 
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import NewStoryApi from '../../api/mockNewStoriesApi';
+import * as itemActions from '../../actions/itemActions';
 
 
 
 export class Item extends Component {
-    constructor(props) {
-        super(props);
-        this.fetchSpecificStory = this.fetchSpecificStory.bind(this);
+    constructor(props,context) {
+        super(props, context);
+        // this.fetchSpecificStory = this.fetchSpecificStory.bind(this);
         this.state = {
-            details: {
-                by: '',
-                descendants: 0,
-                kids: [],
-                parent:0,
-                time: 0,
-                title: '',
-                text:'',
-                type: '',
-                score: 0,
-                url: '',
-                id: 0,
-            },
+            details: Object.assign({},props.details),
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.details !== nextProps.details) {
+            this.setState({details: Object.assign({},nextProps.details)});
         }
     }
 
@@ -35,20 +30,20 @@ export class Item extends Component {
         const { search } = this.props.history.location;
         // console.log(this.props.history)
         const id = search.split('&')[0].split('=')[1];
-        this.fetchSpecificStory(id);
+        this.props.fetchSpecificStory(id);
     }
 
 
-    fetchSpecificStory(id) {
-        let content = (this.props.history.location.pathname === '/item') ? 'story': 'comment';
-        // console.log('in item.js beforeGetContentId', content);
-        NewStoryApi.getContentId(id)
-            .then((details) => {
-                if(details) this.setState({ details });
-                // console.log('in item.js in then getContentId function', details);
-            })
-            .catch(e => console.log('error in fetchSpecificStory ', e));
-    }
+    // fetchSpecificStory(id) {
+    //     let content = (this.props.history.location.pathname === '/item') ? 'story': 'comment';
+    //     // console.log('in item.js beforeGetContentId', content);
+    //     NewStoryApi.getContentId(id)
+    //         .then((details) => {
+    //             if(details) this.setState({ details });
+    //             // console.log('in item.js in then getContentId function', details);
+    //         })
+    //         .catch(e => console.log('error in fetchSpecificStory ', e));
+    // }
 
     render() {
         const {details} = this.state;
@@ -64,4 +59,24 @@ export class Item extends Component {
     }
 }
 
-export default withRouter(Item);
+
+
+
+const mapStateToProps = (state, ownProps) => {
+    
+    // console.log(ownProps, state);
+    let { search } = ownProps.location;
+    const id = search.split('&')[0].split('=')[1];
+    // let details = fetchSpecificStory(id);
+    return {
+        details: state.item,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchSpecificStory: id => dispatch(itemActions.fetchSpecificStory(id)),
+    }
+};
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Item));
