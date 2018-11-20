@@ -1,6 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducers from '../reducers'
-import { applyMiddleware } from '../../../../../Library/Caches/typescript/3.1/node_modules/redux';
+
 import thunk from 'redux-thunk';
 
 // Be sure to ONLY add this middleware in development!

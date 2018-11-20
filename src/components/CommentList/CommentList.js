@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import NewStoryApi from '../../api/mockNewStoriesApi';
 import Comment from '../Comment/Comment';
 import ItemList from '../ItemList/ItemList';
 
@@ -12,13 +11,11 @@ export class CommentList extends Component {
 
     constructor(props) {
         super(props);
-        this.fetchSpecificItem = this.fetchSpecificItem.bind(this);
         this.handleToggleExpand = this.handleToggleExpand.bind(this);
-        console.log(props);
         this.state = {
             obj: Object.assign({},props.obj),
             numIndent: props.numIndent,
-            isExpand: props.isExpand,
+            isExpand: true,
         }
     }
 
@@ -40,18 +37,6 @@ export class CommentList extends Component {
         this.props.fetchSpecificItem(kid);
     }
 
-    fetchSpecificItem(id) {
-        NewStoryApi.getContentId(id)
-            .then((obj) => {
-                if(obj) this.setState({ obj });
-                return NewStoryApi.getParentCount(obj);
-            })
-            .then((numIndent) => {
-                this.setState({numIndent})
-            })
-            .catch(e => console.log('error in fetchSpecificStory ', e));
-    }
-
     handleToggleExpand(e) {
         this.setState(prevState => ({
             isExpand: !prevState.isExpand
@@ -60,7 +45,7 @@ export class CommentList extends Component {
 
     render() {
         const {obj,isExpand,numIndent} = this.state;
-        console.log(obj, isExpand, numIndent);
+        // console.log(obj, isExpand, numIndent);
         const {kids} = obj;
         const indentStyle = {
             textIndent: `${3 * numIndent}%`,
@@ -85,19 +70,35 @@ CommentList.propTypes = {
     kid: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = (state) => {
-    const {obj, numIndent, isExpand} = state.commentList;
+const mapStateToProps = (state, ownProps) => {
+    const {kid} = ownProps;
+    let obj= {
+            by: '',
+            id: 0,
+            kids: [],
+            parent: 0,
+            text: '',
+            time: 0,
+            type: '',
+        };
+    let numIndent = 1;
+    // console.log('in mapStateToProps', Object.keys(state.commentList).length);
+    if(typeof (state.commentList) !== 'undefined' && Object.keys(state.commentList).length > 0
+        && typeof state.commentList[`${kid}`] !== 'undefined') {
+        // console.log('inside if statement', state.commentList[`${kid}`]['obj']['kids']);
+        obj = state.commentList[`${kid}`]['obj'];
+        numIndent = state.commentList[`${kid}`]['numIndent'];
+    }
+    
     return {
         obj,
         numIndent,
-        isExpand,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchSpecificItem: id => dispatch(commentListActions.fetchSpecificStory(id)),
-        handleToggleExpand: () => dispatch(commentListActions.toggleExpand()),
     }
 }
 

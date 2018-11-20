@@ -21,19 +21,7 @@ export default {
         url: '',
         id: 0,
     },
-    commentLists : [{
-        obj: {
-            by: '',
-            id: 0,
-            kids: [],
-            parent: 0,
-            text: '',
-            time: 0,
-            type: '',
-        },
-        numIndent: 1,
-        isExpand: true,
-    },],
+    commentLists : {}, // normalized the commentLists
     
     
 }
