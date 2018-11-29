@@ -13,12 +13,18 @@ export class CommentList extends Component {
         super(props);
         this.handleToggleExpand = this.handleToggleExpand.bind(this);
         this.state = {
-            obj: Object.assign({},props.obj),
+            obj: Object.assign({},props.obj), 
             numIndent: props.numIndent,
             isExpand: true,
         }
     }
 
+    /*
+        Updating the state based componentWillReceiveProps in redux
+        because we are passing state down to the course render, so 
+        when we refresh on this particular component it will go through
+         and populate the updated props from the async fetch
+    */
     componentWillReceiveProps(nextProps) {
         if(this.props.obj !== nextProps.obj) {
             this.setState({obj : Object.assign({},nextProps.obj)});
@@ -70,7 +76,7 @@ CommentList.propTypes = {
     kid: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => { // getting parameters from the url (which is its own props)
     const {kid} = ownProps;
     let obj= {
             by: '',

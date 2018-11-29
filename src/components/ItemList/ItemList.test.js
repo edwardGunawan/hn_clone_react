@@ -27,7 +27,7 @@ describe('ItemList component', () => {
     });
 
     it('should contain 6 CommentList', () => {
-        expect(wrapper.find('CommentList')).toHaveLength(6);
+        expect(wrapper.find('Connect(CommentList)')).toHaveLength(6);
     })
 
     it('should contains CommentList Component', () => {
