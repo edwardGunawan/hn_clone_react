@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import topStories from './topStoriesReducers';
 import newStories from './newStoriesReducers';
 import commentList from './commentListReducers';
+import commentContainer from './commentReducers';
 import item from './itemReducers';
 
 const rootReducer = combineReducers({
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
     newStories,
     item,
     commentList,
+    commentContainer,
 });
 
 export default rootReducer;

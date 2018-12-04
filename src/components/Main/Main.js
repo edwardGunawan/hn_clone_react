@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import NewContainer from '../NewContainer/NewContainer';
 import ShowContainer from '../ShowContainer/ShowContainer';
-import AskContainer from '../AskContainer/AskContainer';
 import CommentContainer from '../CommentContainer/CommentContainer';
-import JobsContainer from '../JobsContainer/JobsContainer';
 import TopContainer from '../TopContainer/TopContainer';
 import Item from '../Item/Item';
 
@@ -19,8 +17,6 @@ export const Main = () => {
             <Route exact path="/comment" component={CommentContainer}/>
             <Route exact key={2344} path="/comment/detail" component={Item}/>
             <Route exact path="/show" component={ShowContainer}/>
-            <Route exact path="/ask" component={AskContainer}/>
-            <Route exact path="/jobs" component={JobsContainer}/>
         </Switch>
     )
 

@@ -52,6 +52,36 @@ export default {
         }
 
         return count;
+    },
+
+    /**
+     * @param {Object} contentObject
+     * Check if the contentObject is a type comment
+     */
+    isComment(contentObject) {
+        return contentObject.type === 'comment';
+    },
+
+    /**
+     * @param {} 
+     * Get all comments from the topStories
+     */
+    async getNewestComment() {
+        try {
+            const { items } = await this.get('updates');
+            let commentArray = [];
+            for(const id of items) {
+                let item = await this.getContentId(id);
+                if(this.isComment(item)) {
+                    commentArray.push(item);
+                }
+            }
+            return commentArray;
+
+        } catch(e) {
+            throw new Error(e);
+        }
+
     }
 
 

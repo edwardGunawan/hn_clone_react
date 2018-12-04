@@ -16,7 +16,7 @@ describe('Testing Main Component Router', () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render 8 Route', () => {
-        expect(wrapper.find('Route').length).toEqual(8);
+    it('should render 6 Route', () => {
+        expect(wrapper.find('Route').length).toEqual(6);
     })
 })

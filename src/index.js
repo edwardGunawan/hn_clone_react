@@ -8,11 +8,13 @@ import { Provider } from 'react-redux';
 import configureStore from './stores/configureStore';
 import { loadStories } from './actions/topActions';
 import { loadNewStories } from './actions/newActions';
+import { commentContainer, fetchAllComments } from './actions/commentActions';
 
 const store = configureStore();
 // we load the initial render for all the get method here
 store.dispatch(loadStories()); 
 store.dispatch(loadNewStories());
+store.dispatch(fetchAllComments());
 
 ReactDOM.render(
     <Provider store={store}>

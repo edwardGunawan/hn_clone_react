@@ -14,7 +14,7 @@ describe("Header Component" , () => {
         wrapper = mount(<MemoryRouter><Header /></MemoryRouter>);
     });
 
-    it('should have 5 Link', () => {
-        expect(wrapper.find('Link')).toHaveLength(5);
+    it('should have 2 Link', () => {
+        expect(wrapper.find('Link')).toHaveLength(2);
     })
 })

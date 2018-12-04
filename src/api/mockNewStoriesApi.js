@@ -46,6 +46,28 @@ class NewStoryApi {
         }));
     }
 
+    static isComment(contentObject) {
+        return contentObject.type === 'comment';
+    }
+
+    static async getNewestComment() {
+        try {
+            const { items } = await this.get('updates');
+            let commentArray = [];
+            for (const id of items) {
+                let item = await this.getContentId(id)
+                if (this.isComment(item)) {
+                    commentArray.push(item);
+                }
+            }
+            return commentArray;
+
+        } catch (e) {
+            throw new Error(e);
+        }
+
+    }
+
 }
 
 

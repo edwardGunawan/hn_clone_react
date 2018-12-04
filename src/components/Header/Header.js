@@ -5,9 +5,6 @@ return (
     <div>
         <Link to="/new"> new </Link>
         <Link to="/comment"> comment </Link>
-        <Link to="/show"> show </Link>
-        <Link to="/ask"> ask </Link>
-        <Link to="/jobs"> jobs </Link>
     </div>
     )
 }

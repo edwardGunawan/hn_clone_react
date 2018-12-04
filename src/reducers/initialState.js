@@ -22,6 +22,7 @@ export default {
         id: 0,
     },
     commentLists : {}, // normalized the commentLists
+    comments:[],
     
     
 }

@@ -4,7 +4,7 @@ import * as types from './actionTypes';
 
 export function loadNewStories() {
     return dispatch => {
-        NewStoryApi.get('newstories')
+        return NewStoryApi.get('newstories')
             .then((ids) => {
                 return NewStoryApi.getItems(ids);
             })
