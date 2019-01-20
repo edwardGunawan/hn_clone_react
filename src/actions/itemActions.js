@@ -5,6 +5,10 @@ export function fetchSpecificStory(id) {
     return dispatch => {
         NewStoryApi.getContentId(id)
             .then((details) => {
+                // console.log('details in itemActions' ,details);
+                NewStoryApi.getContentIncludingKids(details).then((contents) => {
+                    console.log('end of promise content', contents);
+                });
                 if (details) dispatch(fetchSpecificStorySuccess(details));
                 // console.log('in item.js in then getContentId function', details);
             })

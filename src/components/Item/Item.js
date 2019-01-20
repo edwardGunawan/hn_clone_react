@@ -30,7 +30,7 @@ export class Item extends Component {
         const { search } = this.props.history.location;
         // console.log(this.props.history)
         const id = search.split('&')[0].split('=')[1];
-        this.props.fetchSpecificStory(id);
+        this.props.fetchSpecificStory(id); // this should show all the content already
     }
 
 
@@ -66,7 +66,7 @@ const mapStateToProps = (state, ownProps) => {
     
     // console.log(ownProps, state);
     let { search } = ownProps.location;
-    const id = search.split('&')[0].split('=')[1];
+    const id = search.split('&')[0].split('=')[1]; 
     // let details = fetchSpecificStory(id);
     return {
         details: state.item,

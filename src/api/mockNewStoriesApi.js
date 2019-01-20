@@ -50,6 +50,37 @@ class NewStoryApi {
         return contentObject.type === 'comment';
     }
 
+    static async getContentIncludingKids(content) {
+        try {
+            const { kids = [] } = content;
+            if (kids.length === 0) {
+                return content;
+            }
+
+            let kidsPromise = kids.map((id) => {
+                return this.getContentId(id)
+            });
+            const nestedContent = await Promise.all(kidsPromise);
+
+            let allCalls = [];
+            for (let c of nestedContent) {
+                console.log('c inside nestedContent', c);
+                allCalls.push(this.getContentIncludingKids(c)); // async itself is a new Promise
+            }
+
+            const allNestedKidsContent = await Promise.all(allCalls);
+            return Object.assign({}, content, {
+                kids: allNestedKidsContent,
+            });
+        }catch (e) {
+            throw e;
+        }
+    }
+
+    static async getAllKids(kid) {
+
+    }
+
     static async getNewestComment() {
         try {
             const { items } = await this.get('updates');
