@@ -5,7 +5,6 @@ import Comment from '../Comment/Comment';
 import ItemList from '../ItemList/ItemList';
 
 import { connect } from 'react-redux';
-import * as commentListActions from '../../actions/commentListActions';
 
 export class CommentList extends Component {
 
@@ -36,11 +35,6 @@ export class CommentList extends Component {
         if(this.props.isExpand !== nextProps.isExpand) {
             this.setState({isExpand: nextProps.isExpand});
         }
-    }
-
-    componentDidMount() {
-        const {kid} = this.props;
-        this.props.fetchSpecificItem(kid);
     }
 
     handleToggleExpand(e) {
@@ -78,21 +72,12 @@ CommentList.propTypes = {
 
 const mapStateToProps = (state, ownProps) => { // getting parameters from the url (which is its own props)
     const {kid} = ownProps;
-    let obj= {
-            by: '',
-            id: 0,
-            kids: [],
-            parent: 0,
-            text: '',
-            time: 0,
-            type: '',
-        };
+    const {comments} = state.item;
+    let obj= comments[kid];
     let numIndent = 1;
-    // console.log('in mapStateToProps', Object.keys(state.commentList).length);
     if(typeof (state.commentList) !== 'undefined' && Object.keys(state.commentList).length > 0
         && typeof state.commentList[`${kid}`] !== 'undefined') {
         // console.log('inside if statement', state.commentList[`${kid}`]['obj']['kids']);
-        obj = state.commentList[`${kid}`]['obj'];
         numIndent = state.commentList[`${kid}`]['numIndent'];
     }
     
@@ -102,10 +87,5 @@ const mapStateToProps = (state, ownProps) => { // getting parameters from the ur
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchSpecificItem: id => dispatch(commentListActions.fetchSpecificStory(id)),
-    }
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(CommentList);
+export default connect(mapStateToProps)(CommentList);

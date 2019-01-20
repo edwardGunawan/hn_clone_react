@@ -12,13 +12,6 @@ import * as itemActions from '../../actions/itemActions';
 
 
 export class Item extends Component {
-    constructor(props,context) {
-        super(props, context);
-        // this.fetchSpecificStory = this.fetchSpecificStory.bind(this);
-        this.state = {
-            details: Object.assign({},props.details),
-        }
-    }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.details !== nextProps.details) {
@@ -28,31 +21,19 @@ export class Item extends Component {
 
     componentDidMount() {
         const { search } = this.props.history.location;
-        // console.log(this.props.history)
         const id = search.split('&')[0].split('=')[1];
         this.props.fetchSpecificStory(id); // this should show all the content already
     }
 
-
-    // fetchSpecificStory(id) {
-    //     let content = (this.props.history.location.pathname === '/item') ? 'story': 'comment';
-    //     // console.log('in item.js beforeGetContentId', content);
-    //     NewStoryApi.getContentId(id)
-    //         .then((details) => {
-    //             if(details) this.setState({ details });
-    //             // console.log('in item.js in then getContentId function', details);
-    //         })
-    //         .catch(e => console.log('error in fetchSpecificStory ', e));
-    // }
-
     render() {
-        const {details} = this.state;
-        const {kids, type} = details;
-        // console.log('the type in itemjs is ', type);
+        const {parent, history} = this.props;
+        const { search } = history.location;
+        const id = search.split('&')[0].split('=')[1];
+        const {kids,type} = parent[id] || {};
         return (
             <div>
-                {type === 'comment' ? <Comment obj={details}/> : 
-                <Title obj={details} /> }
+                {type === 'comment' ? <Comment obj={parent}/> : 
+                <Title obj={parent} /> }
                 {typeof(kids) !== 'undefined' && kids.length > 0 && <ItemList kids={kids} /> }
             </div>
         )
@@ -62,14 +43,10 @@ export class Item extends Component {
 
 
 
-const mapStateToProps = (state, ownProps) => {
-    
-    // console.log(ownProps, state);
-    let { search } = ownProps.location;
-    const id = search.split('&')[0].split('=')[1]; 
-    // let details = fetchSpecificStory(id);
+const mapStateToProps = (state) => {
+    const {parent} = state.item;
     return {
-        details: state.item,
+        parent,
     }
 }
 

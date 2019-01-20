@@ -9,17 +9,8 @@ export default {
     newStories: [],
 
     details: {
-        by: '',
-        descendants: 0,
-        kids: [],
-        parent: 0,
-        time: 0,
-        title: '',
-        text: '',
-        type: '',
-        score: 0,
-        url: '',
-        id: 0,
+        parent: {},
+        comments:{},
     },
     commentLists : {}, // normalized the commentLists
     comments:[],

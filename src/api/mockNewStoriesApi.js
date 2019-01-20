@@ -64,7 +64,7 @@ class NewStoryApi {
 
             let allCalls = [];
             for (let c of nestedContent) {
-                console.log('c inside nestedContent', c);
+                // console.log('c inside nestedContent', c);
                 allCalls.push(this.getContentIncludingKids(c)); // async itself is a new Promise
             }
 
@@ -75,10 +75,6 @@ class NewStoryApi {
         }catch (e) {
             throw e;
         }
-    }
-
-    static async getAllKids(kid) {
-
     }
 
     static async getNewestComment() {
