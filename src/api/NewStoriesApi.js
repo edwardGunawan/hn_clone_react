@@ -26,6 +26,39 @@ export default {
 
     /**
      * 
+     * @param {Object} content 
+     * Recursively called all the kids and its kids content until leaf
+     */
+
+    async getContentIncludingKids(content) {
+        try {
+            const { kids = [] } = content;
+            if (kids.length === 0) {
+                return content;
+            }
+
+            let kidsPromise = kids.map((id) => {
+                return this.getContentId(id)
+            });
+            const nestedContent = await Promise.all(kidsPromise);
+
+            let allCalls = [];
+            for (let c of nestedContent) {
+                // console.log('c inside nestedContent', c);
+                allCalls.push(this.getContentIncludingKids(c)); // async itself is a new Promise
+            }
+
+            const allNestedKidsContent = await Promise.all(allCalls);
+            return Object.assign({}, content, {
+                kids: allNestedKidsContent,
+            });
+        } catch (e) {
+            throw e;
+        }
+    },
+
+    /**
+     * 
      * @param {array of Number} ids 
      * Get Items from the array of story child, a list of story ids, anything that incorporate with a list of ids
      */
